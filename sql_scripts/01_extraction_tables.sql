@@ -7,50 +7,6 @@ create table blocks
     nonce varchar(42),
     sha3_uncles varchar(66),
     logs_bloom text,
-
-    alter table blocks add constraint blocks_pk primary key (hash);
-
-create index blocks_timestamp_index on blocks (timestamp desc);
-
-create unique index blocks_number_uindex on blocks (number desc);
-
-alter table contracts add constraint contracts_pk primary key (address, block_number);
-
-create index contracts_block_number_index on contracts (block_number desc);
-create index contracts_is_erc20_index on contracts (is_erc20, block_number desc);
-create index contracts_is_erc721_index on contracts (is_erc721, block_number desc);
-
-alter table logs add constraint logs_pk primary key (transaction_hash, log_index);
-
-create index logs_block_timestamp_index on logs (block_timestamp desc);
-
-create index logs_address_block_timestamp_index on logs (address, block_timestamp desc);
-
-alter table token_transfers add constraint token_transfers_pk primary key (transaction_hash, log_index);
-
-create index token_transfers_block_timestamp_index on token_transfers (block_timestamp desc);
-
-create index token_transfers_token_address_block_timestamp_index on token_transfers (token_address, block_timestamp desc);
-create index token_transfers_from_address_block_timestamp_index on token_transfers (from_address, block_timestamp desc);
-create index token_transfers_to_address_block_timestamp_index on token_transfers (to_address, block_timestamp desc);
-
-alter table tokens add constraint tokens_pk primary key (address, block_number);
-
-create index tokens_block_number_index on tokens (block_number desc);
-
-alter table traces add constraint traces_pk primary key (trace_id);
-
-create index traces_block_timestamp_index on traces (block_timestamp desc);
-
-create index traces_from_address_block_timestamp_index on traces (from_address, block_timestamp desc);
-create index traces_to_address_block_timestamp_index on traces (to_address, block_timestamp desc);
-
-alter table transactions add constraint transactions_pk primary key (hash);
-
-create index transactions_block_timestamp_index on transactions (block_timestamp desc);
-
-create index transactions_from_address_block_timestamp_index on transactions (from_address, block_timestamp desc);
-create index transactions_to_address_block_timestamp_index on transactions (to_address, block_timestamp desc);
     transactions_root varchar(66),
     state_root varchar(66),
     receipts_root varchar(66),
